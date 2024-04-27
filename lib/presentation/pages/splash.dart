@@ -12,10 +12,13 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
-
   @override
   void initState() {
     super.initState();
+    _closeSplash();
+  }
+
+  void _closeSplash() {
     Timer(
       const Duration(seconds: 5),
       () => Navigator.of(context).pushReplacementNamed('/authorization'),

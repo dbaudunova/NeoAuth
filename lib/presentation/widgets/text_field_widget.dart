@@ -8,17 +8,19 @@ class TextFieldWidget extends StatelessWidget {
     this.obscureText,
     this.onPressed,
     this.icon,
-    required this.hintText,
+    required this.hintText, required this.controller,
   });
 
   final bool? obscureText;
   final VoidCallback? onPressed;
   final Widget? icon;
   final String hintText;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       style: AppStyles.s16w500.copyWith(
         color: AppColors.buttonColor,
       ),

@@ -31,7 +31,6 @@ class AppTexts {
   static const String checkSpamAgain = 'Не забудь проверить ящик “Спам”!11!!!!';
   static const String gotIt = 'Понятно!!1!';
   static const String welcome = 'Добро пожаловать!';
-  static const String goOut = 'Выйти?';
   static const String areYouSure = 'Точно выйти?';
   static const String yesExactly = 'Да, точно';
   static const String noStay = 'Нет, остаться';
