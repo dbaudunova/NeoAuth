@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:neo_auth/configs/constants/app_assets.dart';
 import 'package:neo_auth/configs/constants/app_styles.dart';
+import 'package:neo_auth/configs/constants/app_texts.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -30,12 +31,12 @@ class _SplashState extends State<Splash> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Lorby',
+              AppTexts.lorby,
               style: AppStyles.s40w500,
             ),
             const SizedBox(height: 16),
             Text(
-              'Твой личный репетитор',
+              AppTexts.yourOwnTutor,
               style: AppStyles.s20w400,
             ),
             const SizedBox(height: 64),

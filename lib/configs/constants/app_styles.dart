@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:neo_auth/configs/constants/app_colors.dart';
 
 class AppStyles {
+  AppStyles._();
+
   static TextStyle s40w500 = TextStyle(
     fontWeight: FontWeight.bold,
     fontFamily: 'MPlusRegular',
@@ -17,7 +19,7 @@ class AppStyles {
   );
 
   static TextStyle s16w500 = TextStyle(
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.bold,
     fontFamily: 'MPlusRegular',
     color: AppColors.hintColor,
     fontSize: 16,

@@ -1,4 +1,6 @@
 class AppTexts {
+  AppTexts._();
+
   static const String lorby = 'Lorby';
   static const String yourOwnTutor = 'Твой личный репетитор';
   static const String ruWelcomeBack = 'Вэлком бэк!';
