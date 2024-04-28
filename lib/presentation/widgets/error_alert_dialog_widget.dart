@@ -13,6 +13,7 @@ class AlertDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      alignment: Alignment.topCenter,
       insetPadding: EdgeInsets.zero,
       title: Text(title),
       titleTextStyle: AppStyles.s16w500.copyWith(color: AppColors.red),

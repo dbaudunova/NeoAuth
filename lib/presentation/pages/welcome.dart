@@ -3,6 +3,8 @@ import 'package:neo_auth/configs/constants/app_assets.dart';
 import 'package:neo_auth/configs/constants/app_colors.dart';
 import 'package:neo_auth/configs/constants/app_styles.dart';
 import 'package:neo_auth/configs/constants/app_texts.dart';
+import 'package:neo_auth/configs/routes/app_routes.dart';
+import 'package:neo_auth/presentation/widgets/exit_alert_dialog.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
@@ -28,16 +30,37 @@ class Welcome extends StatelessWidget {
               const SizedBox(height: 64),
               Image.asset(AppAssets.splash),
               const SizedBox(height: 124),
-              Text(
-                AppTexts.exit,
-                style: AppStyles.s16w500.copyWith(
-                  color: AppColors.buttonColor,
+              GestureDetector(
+                onTap: () {
+                  _buildShowDialog(context);
+                },
+                child: Text(
+                  AppTexts.exit,
+                  style: AppStyles.s16w500.copyWith(
+                    color: AppColors.buttonColor,
+                  ),
                 ),
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Future<dynamic> _buildShowDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return ExitAlertDialog(
+          title: '${AppTexts.exit}?',
+          onTap: () => Navigator.pop(context),
+          onPressed: () => Navigator.pushNamed(
+            context,
+            AppRoutes.authorization,
+          ),
+        );
+      },
     );
   }
 }

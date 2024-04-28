@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:neo_auth/configs/constants/app_assets.dart';
 import 'package:neo_auth/configs/constants/app_styles.dart';
 import 'package:neo_auth/configs/constants/app_texts.dart';
+import 'package:neo_auth/configs/routes/app_routes.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -21,7 +22,7 @@ class _SplashState extends State<Splash> {
   void _closeSplash() {
     Timer(
       const Duration(seconds: 5),
-      () => Navigator.of(context).pushReplacementNamed('/authorization'),
+      () => Navigator.of(context).pushReplacementNamed(AppRoutes.authorization),
     );
   }
 

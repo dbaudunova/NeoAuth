@@ -40,78 +40,83 @@ class _RegistrationState extends State<Registration> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: _buildAppBar(context),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(top: 40),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              '${AppTexts.createAccount}\n${AppTexts.lorby}',
-              style: AppStyles.s40w500.copyWith(
-                fontSize: 24,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 40),
-            TextFieldWidget(
-              hintText: AppTexts.enterEmail,
-              controller: _emailController,
-            ),
-            const SizedBox(height: 16),
-            TextFieldWidget(
-              hintText: AppTexts.createLogin,
-              controller: _loginController,
-            ),
-            const SizedBox(height: 16),
-            TextFieldWidget(
-              obscureText: !_passwordVisible,
-              onPressed: () => setState(
-                () => _passwordVisible = !_passwordVisible,
-              ),
-              icon: Icon(
-                _buildIcon(_passwordVisible),
-                color: AppColors.hintColor,
-              ),
-              hintText: AppTexts.createPassword,
-              controller: _passwordController,
-            ),
-            const SizedBox(height: 8),
-            _buildHelperText(AppTexts.countOfSymbols),
-            _buildHelperText(AppTexts.lowerAndUpperCase),
-            _buildHelperText(AppTexts.min1digital),
-            _buildHelperText(AppTexts.min1specialCharacter),
-            const SizedBox(height: 16),
-            TextFieldWidget(
-              obscureText: !_repeatPasswordVisible,
-              onPressed: () => setState(
-                () => _repeatPasswordVisible = !_repeatPasswordVisible,
-              ),
-              icon: Icon(
-                _buildIcon(_repeatPasswordVisible),
-                color: AppColors.hintColor,
-              ),
-              hintText: AppTexts.repeatPassword,
-              controller: _repeatPasswordController,
-            ),
-            const SizedBox(height: 24),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                    AppColors.unButton,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16).copyWith(top: 40),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  '${AppTexts.createAccount}\n${AppTexts.lorby}',
+                  style: AppStyles.s40w500.copyWith(
+                    fontSize: 24,
                   ),
+                  textAlign: TextAlign.center,
                 ),
-                onPressed: () {},
-                child: Text(
-                  AppTexts.next,
-                  style: AppStyles.s16w500.copyWith(
+                const SizedBox(height: 40),
+                TextFieldWidget(
+                  hintText: AppTexts.enterEmail,
+                  controller: _emailController,
+                ),
+                const SizedBox(height: 16),
+                TextFieldWidget(
+                  hintText: AppTexts.createLogin,
+                  controller: _loginController,
+                ),
+                const SizedBox(height: 16),
+                TextFieldWidget(
+                  obscureText: !_passwordVisible,
+                  onPressed: () => setState(
+                    () => _passwordVisible = !_passwordVisible,
+                  ),
+                  icon: Icon(
+                    _buildIcon(_passwordVisible),
                     color: AppColors.hintColor,
                   ),
+                  hintText: AppTexts.createPassword,
+                  controller: _passwordController,
                 ),
-              ),
+                const SizedBox(height: 8),
+                _buildHelperText(AppTexts.countOfSymbols),
+                _buildHelperText(AppTexts.lowerAndUpperCase),
+                _buildHelperText(AppTexts.min1digital),
+                _buildHelperText(AppTexts.min1specialCharacter),
+                const SizedBox(height: 16),
+                TextFieldWidget(
+                  obscureText: !_repeatPasswordVisible,
+                  onPressed: () => setState(
+                    () => _repeatPasswordVisible = !_repeatPasswordVisible,
+                  ),
+                  icon: Icon(
+                    _buildIcon(_repeatPasswordVisible),
+                    color: AppColors.hintColor,
+                  ),
+                  hintText: AppTexts.repeatPassword,
+                  controller: _repeatPasswordController,
+                ),
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                        AppColors.unButton,
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: Text(
+                      AppTexts.next,
+                      style: AppStyles.s16w500.copyWith(
+                        color: AppColors.hintColor,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
