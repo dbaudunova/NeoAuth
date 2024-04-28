@@ -8,7 +8,8 @@ class TextFieldWidget extends StatelessWidget {
     this.obscureText,
     this.onPressed,
     this.icon,
-    required this.hintText, required this.controller,
+    required this.hintText,
+    required this.controller,
   });
 
   final bool? obscureText;

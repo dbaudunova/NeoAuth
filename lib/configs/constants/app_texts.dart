@@ -16,10 +16,10 @@ class AppTexts {
   static const String enterEmail = 'Введи адрес почты';
   static const String createLogin = 'Придумай логин';
   static const String createPassword = 'Создай пароль';
-  static const String countOfSymbols = 'от 8 до 15 символов';
-  static const String lowerAndUpperCase = 'Строчные и прописные буквы';
-  static const String min1digital = 'Минимум 1 цифра';
-  static const String min1specialCharacter = 'Минимум 1 спецсимвол (!,",#,\$...)';
+  static const String countOfSymbols = '\u2981 От 8 до 15 символов';
+  static const String lowerAndUpperCase = '\u2981 Строчные и прописные буквы';
+  static const String min1digital = '\u2981 Минимум 1 цифра';
+  static const String min1specialCharacter = '\u2981 Минимум 1 спецсимвол (!,",#,\$...)';
   static const String repeatPassword = 'Повтори пароль';
   static const String next = 'Далее';
   static const String passwordMismatch = 'Пароли не сопадают';

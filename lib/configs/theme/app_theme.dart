@@ -13,6 +13,10 @@ class AppTheme {
   }
 
   static InputDecorationTheme get _inputDecoration => InputDecorationTheme(
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.black),
+          borderRadius: BorderRadius.circular(12),
+        ),
         hintStyle: AppStyles.s16w500,
         filled: true,
         fillColor: AppColors.textField,
