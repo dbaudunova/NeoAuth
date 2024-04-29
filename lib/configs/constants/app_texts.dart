@@ -24,7 +24,8 @@ class AppTexts {
   static const String next = 'Далее';
   static const String passwordMismatch = 'Пароли не сопадают';
   static const String emailSent = 'Выслали письмо со ссылкой для завершения регистрации на ';
-  static const String checkSpam = 'Если письмо не пришло, не спеши ждать совиную почту - лучше проверь ящик "Спам"';
+  static const String checkSpam = 'Если письмо не пришло, не спеши ждать совиную почту - лучше ';
+  static const String spam = 'проверь ящик "Спам"';
   static const String smiley = '(´｡• ω •｡`)';
   static const String emailNotCame = 'Письмо не пришло';
   static const String repeatSend = 'Мы выслали еще одно письмо на указанную тобой почту ';

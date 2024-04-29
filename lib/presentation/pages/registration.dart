@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:neo_auth/configs/constants/app_colors.dart';
 import 'package:neo_auth/configs/constants/app_styles.dart';
 import 'package:neo_auth/configs/constants/app_texts.dart';
+import 'package:neo_auth/configs/routes/app_routes.dart';
+import 'package:neo_auth/presentation/widgets/app_bar_widget.dart';
 import 'package:neo_auth/presentation/widgets/text_field_widget.dart';
 
 class Registration extends StatefulWidget {
@@ -39,7 +41,10 @@ class _RegistrationState extends State<Registration> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: _buildAppBar(context),
+      appBar: AppBarStyle(
+        onIconPressed: () => Navigator.pop(context),
+        title: AppTexts.registration,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -105,7 +110,8 @@ class _RegistrationState extends State<Registration> {
                         AppColors.unButton,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () =>
+                        Navigator.pushNamed(context, AppRoutes.mail),
                     child: Text(
                       AppTexts.next,
                       style: AppStyles.s16w500.copyWith(
@@ -131,20 +137,5 @@ class _RegistrationState extends State<Registration> {
 
   IconData _buildIcon(bool password) {
     return password ? Icons.visibility_outlined : Icons.visibility_off_outlined;
-  }
-
-  AppBar _buildAppBar(BuildContext context) {
-    return AppBar(
-      leading: IconButton(
-        onPressed: () => Navigator.pop(context),
-        icon: const Icon(Icons.arrow_back_ios),
-      ),
-      centerTitle: true,
-      toolbarHeight: 56,
-      titleTextStyle: AppStyles.s16w500.copyWith(
-        color: AppColors.buttonColor,
-      ),
-      title: const Text(AppTexts.registration),
-    );
   }
 }

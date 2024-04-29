@@ -32,6 +32,7 @@ class AppTheme {
 
   static ElevatedButtonThemeData get _elevatedButton => ElevatedButtonThemeData(
         style: ButtonStyle(
+          elevation: MaterialStateProperty.all(0),
           overlayColor: MaterialStateProperty.all(Colors.transparent),
           padding: MaterialStateProperty.all(
             const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
