@@ -10,6 +10,9 @@ class TextFieldWidget extends StatelessWidget {
     this.icon,
     required this.hintText,
     required this.controller,
+    this.onChanged,
+    this.validator,
+    this.errorText,
   });
 
   final bool? obscureText;
@@ -17,10 +20,14 @@ class TextFieldWidget extends StatelessWidget {
   final Widget? icon;
   final String hintText;
   final TextEditingController controller;
+  final String? Function(String?)? validator;
+  final String? errorText;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
       controller: controller,
       style: AppStyles.s16w500.copyWith(
         color: AppColors.buttonColor,
@@ -30,6 +37,7 @@ class TextFieldWidget extends StatelessWidget {
       obscureText: obscureText ?? false,
       obscuringCharacter: '*',
       decoration: InputDecoration(
+        errorText: errorText,
         hintText: hintText,
         suffixIcon: IconButton(
           onPressed: onPressed,

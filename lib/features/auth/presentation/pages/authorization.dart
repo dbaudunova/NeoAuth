@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:neo_auth/configs/constants/app_assets.dart';
 import 'package:neo_auth/configs/constants/app_colors.dart';
+import 'package:neo_auth/configs/constants/app_dimensions.dart';
 import 'package:neo_auth/configs/constants/app_styles.dart';
 import 'package:neo_auth/configs/constants/app_texts.dart';
 import 'package:neo_auth/configs/routes/app_routes.dart';
-import 'package:neo_auth/presentation/widgets/error_alert_dialog_widget.dart';
-import 'package:neo_auth/presentation/widgets/text_field_widget.dart';
+import 'package:neo_auth/features/auth/presentation/widgets/error_alert_dialog_widget.dart';
+import 'package:neo_auth/features/auth/presentation/widgets/text_field_widget.dart';
 
 class Authorization extends StatefulWidget {
   const Authorization({super.key});
@@ -63,23 +64,23 @@ class _AuthorizationState extends State<Authorization> {
             alignment: Alignment.topCenter,
             child: Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 16).copyWith(top: 24),
+                  const EdgeInsets.symmetric(horizontal: AppDimensions.d16).copyWith(top: AppDimensions.d24),
               child: Column(
                 children: [
                   Image.asset(AppAssets.auth),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: AppDimensions.d32),
                   Text(
                     AppTexts.ruWelcomeBack,
                     style: AppStyles.s40w500.copyWith(
-                      fontSize: 24,
+                      fontSize: AppDimensions.d24,
                     ),
                   ),
-                  const SizedBox(height: 28),
+                  const SizedBox(height: AppDimensions.d28),
                   TextFieldWidget(
                     hintText: AppTexts.enterLogin,
                     controller: _loginController,
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: AppDimensions.d16),
                   TextFieldWidget(
                     obscureText: !_passwordVisible,
                     onPressed: _passwordVisibility,
@@ -92,7 +93,7 @@ class _AuthorizationState extends State<Authorization> {
                     hintText: AppTexts.enterPassword,
                     controller: _passwordController,
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: AppDimensions.d24),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
@@ -105,7 +106,7 @@ class _AuthorizationState extends State<Authorization> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: AppDimensions.d40),
                   //button or text?
                   GestureDetector(
                     onTap: () => Navigator.pushNamed(

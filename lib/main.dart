@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:neo_auth/configs/routes/app_routes.dart';
-import 'package:neo_auth/configs/theme/app_theme.dart';
+import 'package:neo_auth/internal/di.dart';
+import 'package:neo_auth/internal/my_app.dart';
 
 void main() {
-  return runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.theme,
-      initialRoute: AppRoutes.splash,
-      routes: AppRoutes.getRoutes(),
-    ),
-  );
+  initDependencies();
+  runApp(const MyApp());
 }

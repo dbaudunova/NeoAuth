@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:neo_auth/presentation/pages/authorization.dart';
-import 'package:neo_auth/presentation/pages/mail_confirmation.dart';
-import 'package:neo_auth/presentation/pages/registration.dart';
-import 'package:neo_auth/presentation/pages/splash.dart';
-import 'package:neo_auth/presentation/pages/welcome.dart';
+import 'package:neo_auth/features/auth/presentation/pages/authorization.dart';
+import 'package:neo_auth/features/mail_conformation/presentation/pages/mail_confirmation.dart';
+import 'package:neo_auth/features/registration/presentation/pages/registration.dart';
+import 'package:neo_auth/features/splash/presentation/pages/splash.dart';
+import 'package:neo_auth/features/welcome/presentation/pages/welcome.dart';
 
 class AppRoutes {
   AppRoutes._();

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:neo_auth/configs/constants/app_assets.dart';
+import 'package:neo_auth/configs/constants/app_dimensions.dart';
 import 'package:neo_auth/configs/constants/app_styles.dart';
 import 'package:neo_auth/configs/constants/app_texts.dart';
 import 'package:neo_auth/configs/routes/app_routes.dart';
@@ -38,12 +39,12 @@ class _SplashState extends State<Splash> {
               AppTexts.lorby,
               style: AppStyles.s40w500,
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppDimensions.d12),
             Text(
               AppTexts.yourOwnTutor,
               style: AppStyles.s20w400,
             ),
-            const SizedBox(height: 64),
+            const SizedBox(height: AppDimensions.d64),
             Image.asset(AppAssets.splash),
           ],
         ),

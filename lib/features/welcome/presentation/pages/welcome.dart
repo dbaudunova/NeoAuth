@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:neo_auth/configs/constants/app_assets.dart';
 import 'package:neo_auth/configs/constants/app_colors.dart';
+import 'package:neo_auth/configs/constants/app_dimensions.dart';
 import 'package:neo_auth/configs/constants/app_styles.dart';
 import 'package:neo_auth/configs/constants/app_texts.dart';
 import 'package:neo_auth/configs/routes/app_routes.dart';
-import 'package:neo_auth/presentation/widgets/exit_alert_dialog.dart';
+import 'package:neo_auth/features/welcome/presentation/widgets/exit_alert_dialog.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
@@ -20,16 +21,16 @@ class Welcome extends StatelessWidget {
             children: [
               Text(
                 AppTexts.welcomeBack,
-                style: AppStyles.s40w500.copyWith(fontSize: 24),
+                style: AppStyles.s40w500.copyWith(fontSize: AppDimensions.d24),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppDimensions.d16),
               Text(
                 '${AppTexts.lorby} - ${AppTexts.yourOwnTutor.toLowerCase()}',
                 style: AppStyles.s20w400,
               ),
-              const SizedBox(height: 64),
+              const SizedBox(height: AppDimensions.d64),
               Image.asset(AppAssets.splash),
-              const SizedBox(height: 124),
+              const SizedBox(height: AppDimensions.d124),
               GestureDetector(
                 onTap: () {
                   _buildShowDialog(context);
