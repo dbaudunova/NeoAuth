@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:neo_auth/configs/constants/app_assets.dart';
 import 'package:neo_auth/configs/constants/app_colors.dart';
 import 'package:neo_auth/configs/constants/app_dimensions.dart';
 import 'package:neo_auth/configs/constants/app_styles.dart';
 import 'package:neo_auth/configs/constants/app_texts.dart';
 import 'package:neo_auth/configs/routes/app_routes.dart';
-import 'package:neo_auth/features/auth/presentation/widgets/error_alert_dialog_widget.dart';
+import 'package:neo_auth/features/auth/presentation/bloc/authorization_bloc.dart';
 import 'package:neo_auth/features/auth/presentation/widgets/text_field_widget.dart';
 
 class Authorization extends StatefulWidget {
@@ -41,19 +42,6 @@ class _AuthorizationState extends State<Authorization> {
     );
   }
 
-  void _signIn() {
-    String enteredLogin = _loginController.text;
-    String enteredPassword = _passwordController.text;
-
-    if (enteredLogin == 'user' && enteredPassword == 'password') {
-      Navigator.pushNamed(context, AppRoutes.welcome);
-    } else {
-      _buildShowDialog(context);
-      _passwordController.clear();
-      _loginController.clear();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,8 +51,8 @@ class _AuthorizationState extends State<Authorization> {
           child: Container(
             alignment: Alignment.topCenter,
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: AppDimensions.d16).copyWith(top: AppDimensions.d24),
+              padding: const EdgeInsets.symmetric(horizontal: AppDimensions.d16)
+                  .copyWith(top: AppDimensions.d24),
               child: Column(
                 children: [
                   Image.asset(AppAssets.auth),
@@ -94,18 +82,8 @@ class _AuthorizationState extends State<Authorization> {
                     controller: _passwordController,
                   ),
                   const SizedBox(height: AppDimensions.d24),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: ElevatedButton(
-                      onPressed: _signIn,
-                      child: Text(
-                        AppTexts.signIn,
-                        style: AppStyles.s16w500.copyWith(
-                          color: AppColors.textField,
-                        ),
-                      ),
-                    ),
-                  ),
+                  _buildBlocListener(context),
+
                   const SizedBox(height: AppDimensions.d40),
                   //button or text?
                   GestureDetector(
@@ -129,23 +107,55 @@ class _AuthorizationState extends State<Authorization> {
     );
   }
 
-  Future<dynamic> _buildShowDialog(BuildContext context) {
-    return showDialog(
-      barrierColor: Colors.transparent,
-      context: context,
-      builder: (context) {
-        _closeAlert(context);
-        return const AlertDialogWidget(
-          title: AppTexts.incorrectLoginOrPassword,
-        );
+  BlocListener<AuthorizationBloc, AuthorizationState> _buildBlocListener(
+      BuildContext context) {
+    return BlocListener<AuthorizationBloc, AuthorizationState>(
+      listener: (context, state) {
+        if (state is AuthorizationDone) {
+          Navigator.pushNamed(context, AppRoutes.welcome);
+        } else if (state is AuthorizationError) {
+          _buildShowDialog(context);
+        }
       },
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: ElevatedButton(
+          onPressed: () {
+            BlocProvider.of<AuthorizationBloc>(context).add(
+              MakeAuthorization(
+                username: _loginController.text,
+                password: _passwordController.text,
+              ),
+            );
+          },
+          child: Text(
+            AppTexts.signIn,
+            style: AppStyles.s16w500.copyWith(
+              color: AppColors.textField,
+            ),
+          ),
+        ),
+      ),
     );
   }
 
-  void _closeAlert(BuildContext context) {
-    Future.delayed(
-      const Duration(seconds: 3),
-      () => Navigator.pop(context),
+  void _buildShowDialog(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text(
+        AppTexts.incorrectLoginOrPassword,
+        style: AppStyles.s16w500.copyWith(color: AppColors.red),
+      ),
+      backgroundColor: Colors.white,
+      elevation: 0,
+      behavior: SnackBarBehavior.floating,
+      dismissDirection: DismissDirection.up,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: AppColors.red),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).size.height - 70, left: 10, right: 10),
     );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

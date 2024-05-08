@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:neo_auth/configs/routes/app_routes.dart';
 import 'package:neo_auth/configs/theme/app_theme.dart';
-import 'package:neo_auth/features/registration/data/data_source/remote/registration_data_source.dart';
-import 'package:neo_auth/features/registration/data/repository/registration_repository_impl.dart';
-import 'package:neo_auth/features/registration/domain/repository/registration_repository.dart';
-import 'package:neo_auth/features/registration/domain/usecase/registration_use_case.dart';
+import 'package:neo_auth/features/auth/presentation/bloc/authorization_bloc.dart';
 import 'package:neo_auth/features/registration/presentation/bloc/registration_bloc.dart';
+import 'package:neo_auth/internal/di.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -18,8 +16,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (context) => RegistrationBloc(RegistrationUseCase(
-                RegistrationRepositoryImpl(RegistrationDataSourceImpl()))))
+          create: (context) => sl<RegistrationBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<AuthorizationBloc>(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
