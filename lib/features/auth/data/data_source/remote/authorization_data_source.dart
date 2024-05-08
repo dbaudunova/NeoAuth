@@ -28,26 +28,3 @@ class AuthorizationDataSourceImpl implements AuthorizationDataSource {
     return AuthorizationModel.fromJson(response.data);
   }
 }
-
-//class RegistrationDataSourceImpl implements RegistrationDataSource {
-//   final Dio _dio;
-//   RegistrationDataSourceImpl()
-//       : _dio = Dio(BaseOptions(
-//     headers: {
-//       'accept': 'application/json',
-//       'content-type': 'application/json',
-//     },
-//     contentType: Headers.jsonContentType,
-//   ));
-//   @override
-//   Future<RegistrationModel> registerUser(String email, String username, String password) async {
-//     final registrationModel = RegistrationModel(
-//       email: email,
-//       username: username,
-//       password: password,
-//     );
-//     const url = 'https://atai-mamytov.click/neoauth/users/registration/';
-//     final response = await _dio.post(url, data: registrationModel.toJson());
-//     return RegistrationModel.fromJson(response.data);
-//   }
-// }

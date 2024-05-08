@@ -85,7 +85,6 @@ class _AuthorizationState extends State<Authorization> {
                   _buildBlocListener(context),
 
                   const SizedBox(height: AppDimensions.d40),
-                  //button or text?
                   GestureDetector(
                     onTap: () => Navigator.pushNamed(
                       context,
