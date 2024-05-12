@@ -26,14 +26,14 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
   }
 
   void onValidation(Validation event, Emitter<RegistrationState> emit) async {
-    final bool validLength =
+    final validLength =
         event.password.length >= 8 && event.password.length <= 15;
-    final bool hasUpperAndLowerCase =
+    final hasUpperAndLowerCase =
         event.password.contains(RegExp(r'[A-Z]')) &&
             event.password.contains(RegExp(r'[a-z]'));
-    final bool hasDigits = event.password.contains(RegExp(r'[0-9]'));
-    final bool hasSpecialSymbols =
-        event.password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
+    final hasDigits = event.password.contains(RegExp(r'[0-9]'));
+    final hasSpecialSymbols =
+        event.password.contains(RegExp(r'[+_\!=;-@#$%^&*/(),.?":{}|<>]'));
 
     emit(
       ValidationState(

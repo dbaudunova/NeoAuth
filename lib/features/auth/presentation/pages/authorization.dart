@@ -71,7 +71,7 @@ class _AuthorizationState extends State<Authorization> {
                   const SizedBox(height: AppDimensions.d16),
                   TextFieldWidget(
                     obscureText: !_passwordVisible,
-                    onPressed: _passwordVisibility,
+                    onSuffixPressed: _passwordVisibility,
                     icon: Icon(
                       _passwordVisible
                           ? Icons.visibility_outlined
@@ -153,7 +153,7 @@ class _AuthorizationState extends State<Authorization> {
         borderRadius: BorderRadius.circular(12),
       ),
       margin: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height - 70, left: 10, right: 10),
+          bottom: MediaQuery.of(context).size.height - 100, left: 10, right: 10),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }

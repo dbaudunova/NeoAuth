@@ -23,12 +23,8 @@ class _RegistrationState extends State<Registration> {
   final _repeatPasswordController = TextEditingController();
   late bool _passwordVisible;
   late bool _repeatPasswordVisible;
-  bool _isPasswordValid = false;
-  bool _isSpecialValid = false;
-  bool _isDigitalValid = false;
-  bool _isNumberValid = false;
-  String? errorTextEmail;
   bool _repeatPasswordValid = false;
+  String? errorTextEmail;
 
   @override
   void dispose() {
@@ -44,6 +40,18 @@ class _RegistrationState extends State<Registration> {
     super.initState();
     _passwordVisible = false;
     _repeatPasswordVisible = false;
+  }
+
+  bool get _isFormValid {
+    final state = BlocProvider.of<RegistrationBloc>(context).state;
+    if (state is ValidationState) {
+      return state.lowerAndUpperCase &&
+          state.minOneDigital &&
+          state.passwordLength &&
+          state.minOneSpecialSymbol &&
+          _repeatPasswordValid;
+    }
+    return false;
   }
 
   @override
@@ -95,7 +103,7 @@ class _RegistrationState extends State<Registration> {
                 const SizedBox(height: AppDimensions.d16),
                 TextFieldWidget(
                   obscureText: !_passwordVisible,
-                  onPressed: () => setState(
+                  onSuffixPressed: () => setState(
                     () => _passwordVisible = !_passwordVisible,
                   ),
                   icon: Icon(
@@ -105,27 +113,40 @@ class _RegistrationState extends State<Registration> {
                   hintText: AppTexts.createPassword,
                   controller: _passwordController,
                   onChanged: (value) {
-                    setState(() {
-                      _isPasswordValid = _isPasswordCompliant(value);
-                      _isDigitalValid = _isDigitalCompliant(value);
-                      _isNumberValid = _isCountCompliant(value);
-                      _isSpecialValid = _isSpecialCompliant(value);
-                    });
+                    context.read<RegistrationBloc>().add(
+                          Validation(password: value),
+                        );
                   },
                 ),
-                const SizedBox(height: AppDimensions.d8),
-                _buildHelperText(AppTexts.countOfSymbols,
-                    _isNumberValid ? AppColors.green : AppColors.red),
-                _buildHelperText(AppTexts.lowerAndUpperCase,
-                    _isPasswordValid ? AppColors.green : AppColors.red),
-                _buildHelperText(AppTexts.min1digital,
-                    _isDigitalValid ? AppColors.green : AppColors.red),
-                _buildHelperText(AppTexts.min1specialCharacter,
-                    _isSpecialValid ? AppColors.green : AppColors.red),
+                BlocBuilder<RegistrationBloc, RegistrationState>(
+                  builder: (context, state) {
+                    if (state is ValidationState) {
+                      final isPasswordValid = state.lowerAndUpperCase;
+                      final isDigitalValid = state.minOneDigital;
+                      final isNumberValid = state.passwordLength;
+                      final isSpecialValid = state.minOneSpecialSymbol;
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          _buildHelperText(
+                              AppTexts.countOfSymbols, isNumberValid),
+                          _buildHelperText(
+                              AppTexts.lowerAndUpperCase, isPasswordValid),
+                          _buildHelperText(
+                              AppTexts.min1digital, isDigitalValid),
+                          _buildHelperText(
+                              AppTexts.min1specialCharacter, isSpecialValid),
+                        ],
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
+                ),
                 const SizedBox(height: AppDimensions.d16),
                 TextFieldWidget(
                   obscureText: !_repeatPasswordVisible,
-                  onPressed: () => setState(
+                  onSuffixPressed: () => setState(
                     () => _repeatPasswordVisible = !_repeatPasswordVisible,
                   ),
                   icon: Icon(
@@ -164,7 +185,7 @@ class _RegistrationState extends State<Registration> {
                           return AppColors.buttonColor;
                         }),
                       ),
-                      onPressed: _isFormValid()
+                      onPressed: _isFormValid
                           ? () =>
                               BlocProvider.of<RegistrationBloc>(context).add(
                                 MakeRegister(
@@ -191,39 +212,14 @@ class _RegistrationState extends State<Registration> {
     );
   }
 
-  bool _isFormValid() {
-    return _isPasswordValid &&
-        _isDigitalValid &&
-        _isNumberValid &&
-        _isSpecialValid &&
-        _repeatPasswordValid;
-  }
-
-  bool _isPasswordCompliant(String password) {
-    RegExp regExp = RegExp(r'(?=.*?[A-Za-z])');
-    return regExp.hasMatch(password);
-  }
-
-  bool _isSpecialCompliant(String password) {
-    RegExp regExp = RegExp(r'(?=.*?[!@#\$&*~])');
-    return regExp.hasMatch(password);
-  }
-
-  bool _isDigitalCompliant(String password) {
-    RegExp regExp = RegExp(r'(?=.*?[0-9])');
-    return regExp.hasMatch(password);
-  }
-
-  bool _isCountCompliant(String password) {
-    RegExp regExp = RegExp(r'.{8,15}');
-    return regExp.hasMatch(password);
-  }
-
-  Text _buildHelperText(String text, Color color) {
+  Text _buildHelperText(String text, bool isValid) {
+    Color color = isValid ? AppColors.green : AppColors.red;
     return Text(
       text,
-      style:
-          AppStyles.s16w500.copyWith(fontSize: AppDimensions.d12, color: color),
+      style: AppStyles.s16w500.copyWith(
+        fontSize: AppDimensions.d12,
+        color: color,
+      ),
     );
   }
 

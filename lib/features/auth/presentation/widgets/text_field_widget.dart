@@ -6,7 +6,7 @@ class TextFieldWidget extends StatelessWidget {
   const TextFieldWidget({
     super.key,
     this.obscureText,
-    this.onPressed,
+    this.onSuffixPressed,
     this.icon,
     required this.hintText,
     required this.controller,
@@ -16,7 +16,7 @@ class TextFieldWidget extends StatelessWidget {
   });
 
   final bool? obscureText;
-  final VoidCallback? onPressed;
+  final VoidCallback? onSuffixPressed;
   final Widget? icon;
   final String hintText;
   final TextEditingController controller;
@@ -40,7 +40,7 @@ class TextFieldWidget extends StatelessWidget {
         errorText: errorText,
         hintText: hintText,
         suffixIcon: IconButton(
-          onPressed: onPressed,
+          onPressed: onSuffixPressed,
           icon: icon ?? const Icon(null),
         ),
       ),
